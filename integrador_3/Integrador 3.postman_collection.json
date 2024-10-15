@@ -1,0 +1,352 @@
+{
+	"info": {
+		"_postman_id": "09a65a32-54f9-47d5-ba6e-b3ee144590ad",
+		"name": "Integrador 3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24026011"
+	},
+	"item": [
+		{
+			"name": "a) Agregar nuevo estudiante",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Nuevo\",\r\n    \"apellido\": \"Estudiante\",\r\n    \"edad\": 32,\r\n    \"genero\": \"f\",\r\n    \"dni\": 33,\r\n    \"ciudad\": \"Buenos Aires\",\r\n    \"nroLibreta\": 555555,\r\n    \"inscripciones\": []\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/estudiantes/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"estudiantes",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "b) Matricular un estudiante en una carrera",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"María\",\r\n    \"apellido\": \"García\",\r\n    \"edad\": 22,\r\n    \"genero\": \"f\",\r\n    \"dni\": 11333444,\r\n    \"ciudad\": \"Villa Traful\",\r\n    \"nroLibreta\": 654321\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/inscripciones/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"inscripciones",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "c) Obtener estudiantes por apellido",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/estudiantes/apellido/Gonzalez",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"estudiantes",
+						"apellido",
+						"Gonzalez"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "d) Obtener estudiante por LU",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/estudiantes/libreta/223344",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"estudiantes",
+						"libreta",
+						"223344"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "e) Obtener estudiante por género",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/estudiantes/genero/f",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"estudiantes",
+						"genero",
+						"f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "f) Obtener carreras con cantidad de inscriptos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/inscripciones/inscriptos-carreras",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"inscripciones",
+						"inscriptos-carreras"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "g) Obtener estudiantes por carrera y ciudad",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/estudiantes/carrera/Fisica/ciudad/Rauch",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"estudiantes",
+						"carrera",
+						"Fisica",
+						"ciudad",
+						"Rauch"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "h) Obtener reporte",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/inscripciones/informe",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"inscripciones",
+						"informe"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener todos los estudiantes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/estudiantes/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"estudiantes",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener estudiante por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/estudiantes/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"estudiantes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar estudiante",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/estudiantes/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"estudiantes",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener todas las carreras",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/carreras/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"carreras",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener una carrera por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/carreras/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"carreras",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agregar nueva carrera",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"nombreCarrera\": \"Educación Física\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/carreras/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"carreras",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar carrera",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"nombreCarrera\": \"Educación Física\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/carreras/6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"carreras",
+						"6"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
