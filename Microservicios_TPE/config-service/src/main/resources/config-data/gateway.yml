@@ -1,0 +1,25 @@
+server:
+  port: 2000
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      default-zone: http://localhost:8761/eureka
+  instance:
+    hostname: localhost
+
+spring:
+  cloud:
+    gateway:
+      mvc:
+        routes:
+          - id: microservice-cliente
+            uri: lb://microservice-cliente
+            predicates:
+              - Path=/api/clientes/**
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+
