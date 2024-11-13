@@ -5,9 +5,7 @@ import com.example.entities.Monopatin;
 import com.example.mappers.MonopatinMapper;
 import com.example.repository.MonopatinRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +14,6 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class MonopatinService {
 
     @Autowired
@@ -51,9 +48,7 @@ public class MonopatinService {
         }
 
         Monopatin nuevoMonopatin = monopatinMapper.toMonopatin(monopatinDto);
-
         Monopatin guardado = monopatinRepository.save(nuevoMonopatin);
-
         return monopatinMapper.toMonopatinDto(guardado);
     }
 
@@ -70,7 +65,6 @@ public class MonopatinService {
         monopatinExistente.setTiempoUso(monopatinDto.getTiempoUso());
 
         Monopatin actualizado = monopatinRepository.save(monopatinExistente);
-
         return monopatinMapper.toMonopatinDto(actualizado);
     }
 
@@ -83,6 +77,8 @@ public class MonopatinService {
         return monopatinMapper.toMonopatinDto(monopatinExistente);
     }
 
+    // ---------------------------------------- Servicios ----------------------------------------
+
     @Transactional
     public void establecerEstado(Long id, String estado) {
         Monopatin monopatinExistente = monopatinRepository.findById(id)
@@ -91,15 +87,7 @@ public class MonopatinService {
         monopatinExistente.setEstado(estado);
     }
 
-    // 3. a) Genera reporte de monopatines para verificar mantenimiento.
-    public List<MonopatinDto> generarReporteMantenimiento(int kmMantenimiento) {
-        return this.monopatinRepository.generarReporteMantenimiento(kmMantenimiento)
-                .stream()
-                .map(MonopatinDto::new)
-                .toList();
-    }
-
-    // 3. e) Cantidad de monopatines según su estado.
+    // 3. e) Devolver cantidad de monopatines según su estado.
     public int obtenerCantidadEnOperacion() {
         return monopatinRepository.countByEstado("En uso") + monopatinRepository.countByEstado("En parada");
     }
@@ -108,7 +96,7 @@ public class MonopatinService {
         return monopatinRepository.countByEstado("En mantenimiento");
     }
 
-    // 3. g) Cantidad de monopatines disponibles en una zona especificada.
+    // 3. g) Obtener cantidad de monopatines disponibles en una zona especificada.
     public List<MonopatinDto> obtenerMonopatinesCercanos(double latitud, double longitud) {
         List<Monopatin> monopatines = monopatinRepository.findMonopatinesCercanos(latitud, longitud);
 

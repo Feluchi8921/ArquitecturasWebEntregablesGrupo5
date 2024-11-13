@@ -10,6 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Admin {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,4 +26,5 @@ public class Admin {
 
     @Column(nullable = false)
     private String contrasenia;
+
 }

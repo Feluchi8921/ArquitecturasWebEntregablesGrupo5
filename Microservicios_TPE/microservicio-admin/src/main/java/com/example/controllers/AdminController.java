@@ -1,8 +1,6 @@
 package com.example.controllers;
 
-import com.example.dto.AdminDto;
-import com.example.dto.CantidadMonopatinesEstadoDto;
-import com.example.dto.TarifaRequestDto;
+import com.example.dto.*;
 import com.example.model.Monopatin;
 import com.example.model.Parada;
 import com.example.services.AdminService;
@@ -137,12 +135,24 @@ public class AdminController {
         }
     }
 
-    // ------------------------------------- Servicios -------------------------------------
+    // -------------------------------------------- Servicios --------------------------------------------
 
-    // 3. c) Cantidad de monopatines con más viajes que una cantidad dada en un determinado año.
+    // 3. c) Obtener cantidad de monopatines con más de X viajes en un determinado año.
+    @GetMapping("/cant-monopatines/cant-viajes/{cantViajes}/anio/{anio}")
+    public ResponseEntity<?> monopatinesCantViajesAnio(@PathVariable Integer cantViajes, @PathVariable Integer anio) {
+        List<CantViajesMonopatinDto> respuesta = adminService.monopatinesCantViajesAnio(cantViajes, anio);
+        return new ResponseEntity<>(respuesta, HttpStatus.OK);
+    }
 
-    // 3. e) Cantidad de monopatines según su estado.
-    @GetMapping("/monopatines/cantidad")
+    // 3. d) Obtener total facturado en un rango de meses un cierto año.
+    @GetMapping("/total-facturado")
+    public ResponseEntity<?> obtenerTotalFacturado(@RequestParam Integer anio, @RequestParam Integer mesInicio, @RequestParam Integer mesFin) {
+        TotalFacturadoDto total = adminService.obtenerTotalFacturado(anio, mesInicio, mesFin);
+        return new ResponseEntity<>(total, HttpStatus.OK);
+    }
+
+    // 3. e) Obtener cantidad de monopatines según su estado.
+    @GetMapping("/monopatines/cantidad-estado")
     public ResponseEntity<?> obtenerCantidadMonopatines() {
         CantidadMonopatinesEstadoDto respuesta = adminService.obtenerCantidadMonopatines();
         return new ResponseEntity<>(respuesta, HttpStatus.OK);

@@ -30,8 +30,7 @@ public class Cuenta {
     @ManyToMany(mappedBy = "cuentas") // Referencia al atributo en Usuario
     private List<Usuario> usuarios;
 
-    public Cuenta(Long id, Double tarifa, LocalDate fechaAlta, Double saldo, boolean habilitada) {
-        this.id = id;
+    public Cuenta(Double tarifa, LocalDate fechaAlta, Double saldo, boolean habilitada) {
         this.tarifa = tarifa;
         this.fechaAlta = fechaAlta;
         this.saldo = saldo;

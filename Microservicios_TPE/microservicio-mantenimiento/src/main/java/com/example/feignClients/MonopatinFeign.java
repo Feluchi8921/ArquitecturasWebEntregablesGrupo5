@@ -20,8 +20,4 @@ public interface MonopatinFeign {
     @PutMapping("api/monopatines/finalizar-mantenimiento/{id}")
     void finalizarMantenimiento(@PathVariable Long id);
 
-    // 3. a) Genera reporte de monopatines para verificar mantenimiento.
-    @GetMapping("api/monopatines/reporte")
-    List<Monopatin> obtenerReporte(@RequestParam int kmMantenimiento);
-
 }

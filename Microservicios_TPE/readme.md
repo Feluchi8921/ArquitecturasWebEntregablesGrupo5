@@ -11,6 +11,11 @@ El servicio está compuesto por los microservicios:
 *  microservicio-parada
 *  microservicio-viaje
 
+***Nota: En la raíz del proyecto se encuentra **postman_collection.json** con los endpoints***
+
+***Importante!!!*** Antes de correr los microservicios asegurarse de levantar todos los archivos Dockers contenidos en cada microservicio
+***Luego correr cada aplicación en este orden:*** ConfigServiceApplication, EurekaServiceApplication, GatewayApplication y luego cada microservicio. De esta manera podrá realizar las consultas con los datos precargados.
+
 #### Diagrama de microservicios:
    ![Diagrama-microservicios](images/Diagrama-microservicios.png)
 
@@ -35,7 +40,7 @@ El servicio está compuesto por los microservicios:
 
 
 * **C) Modificar un monopatin:**
-	* **Método:** POST
+	* **Método:** GET
 	* **URL:** http://localhost:57270/api/monopatines/id/1
 	* **Cuerpo:** Ejemplo de JSON:
 	  {
@@ -99,12 +104,6 @@ El servicio está compuesto por los microservicios:
 	* **Respuesta Ok:** JSON con la parada eliminada
 	* **Mensaje error:** Mensaje: No se pudo eliminar la parada con ID 1"
 
-*  El administrador registra monopatín en mantenimiento y cambia el estado (En mantenimiento)
-* **Método:** PUT
-	* **URL:** http://localhost:57270/api/admins/estado-cuenta/1/estado/true
-	* **Respuesta Ok:** Mensaje: "Cuenta con ID  habilitada = estado"
-    * **Mensaje error:** Mensaje: "No se encontró la cuenta con ID 1"
-
 
 ### Gestiones de mantenimiento
 *  El encargado de mantenimiento inicia un mantenimiento
@@ -133,6 +132,19 @@ El servicio está compuesto por los microservicios:
 	* **Respuesta Ok:** Mensaje: "Cuenta con ID 1 habilitada = true
     * **Mensaje error:** Mensaje: "No se encontró la cuenta con ID 1"
 
+*   Ejercicio 3 - c)  Como administrador quiero consultar los monopatines con más de X viajes en un cierto año.
+* **Método:** GET
+	* **URL:** http://localhost:57270/api/admins/cant-monopatines/cant-viajes/{cantViajes}/anio/{anio}
+	* **Respuesta Ok:** Json con id de monopatin y cantidad de viajes.
+
+*   Ejercicio 3 - d) Como administrador quiero consultar el total facturado en un rango de meses de cierto año.
+* **Método:** GET
+	* **URL:** http://localhost:57270/api/admins/total-facturado
+    * Parámetros de consulta
+    * anio=2024
+    * mesInicio=2
+    * mesFin=3
+	* **Respuesta Ok:** Mensaje con el total facturado.
 
 *   Ejercicio 3 - e) Como administrador quiero consultar la cantidad de monopatines actualmente en operación,  versus la cantidad de monopatines actualmente en mantenimiento
 * **Método:** GET
@@ -140,7 +152,7 @@ El servicio está compuesto por los microservicios:
 	* **Respuesta Ok:** Devuelve un numero entero con la cantidad de monopatines en operación y un entero de monopatines en mantenimiento
 
 *   Ejercicio 3 - f. Como administrador quiero hacer un ajuste de precios, y que a partir de cierta fecha el sistema  habilite los nuevos precios.
-* **Método:** GET
+* **Método:** PUT
 	* * **Cuerpo:** Ejemplo de JSON:
 	{
   		"nuevoValor": 1500.0,
@@ -150,7 +162,7 @@ El servicio está compuesto por los microservicios:
 	* **Respuesta Ok:** "Nuevo valor de tarifa normal: 1500.0"
 	* **Mensaje error:** "No se pudo modificar el valor de la tarifa normal"
 
-* **Método:** GET
+* **Método:** PUT
 	* * **Cuerpo:** Ejemplo de JSON:
 		{
 		"nuevoValor": 2000.0,
@@ -159,6 +171,7 @@ El servicio está compuesto por los microservicios:
 	* **URL:** http://localhost:57270/api/admins/modificar-tarifa-extra/
 	* **Respuesta Ok:** "Nuevo valor de tarifa extra: 2000.0"
 	* **Mensaje error:** "No se pudo modificar el valor de la tarifa extra"
+
 
 *   Ejercicio 3 - g. Como usuario quiero un listado de los monopatines cercanos a mi zona, para poder encontrar  un monopatín cerca de mi ubicación
 * **Método:** GET
@@ -169,10 +182,6 @@ El servicio está compuesto por los microservicios:
 	* **Respuesta Ok:** Devuelve una lista de monopatines
 	* **Mensaje error:** "Error al consultar monopatines cercanos."
 
-
-***Nota: En la raíz del proyecto se encuentra **postman_collection.json** con los endpoints***
-
-***Importante!!!*** Antes de correr los microservicios asegurarse de levantar todos los archivos Dockers contenidos en cada microservicio
-***Luego correr cada aplicación en este orden:*** ConfigServiceApplication, EurekaServiceApplication, GatewayApplication y luego cada microservicio. De esta manera podrá realizar las consultas con los datos precargados.
+	
 
 * *Autores: Aguerralde Felicitas, De La Torre Giuiliana, Gramuglia Eliana, Guidi Franco, Rodriguez Farias Julian*

@@ -1,7 +1,6 @@
 package com.example.controllers;
 
 import com.example.dto.MonopatinDto;
-import com.example.entities.Monopatin;
 import com.example.services.MonopatinService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -84,27 +83,21 @@ public class MonopatinController {
 
     // ---------------------------------------------- Servicios ----------------------------------------------
 
-    // 3. a) Genera reporte de monopatines para verificar mantenimiento.
-    @GetMapping("/reporte")
-    public ResponseEntity<List<MonopatinDto>> obtenerReporte(@RequestParam int kmMantenimiento) {
-        List<MonopatinDto> monopatines = monopatinService.generarReporteMantenimiento(kmMantenimiento);
-        return ResponseEntity.ok(monopatines);
-    }
-
-    // 3. e) Cantidad de monopatines según su estado
-    @GetMapping("/cantidad/operacion")
+    // 3. e) Devolver cantidad de monopatines según su estado (en operación)
+    @GetMapping("/cantidad-operacion")
     public ResponseEntity<Integer> getCantidadEnOperacion() {
         int cantidadEnOperacion = monopatinService.obtenerCantidadEnOperacion();
         return ResponseEntity.ok(cantidadEnOperacion);
     }
 
-    @GetMapping("/cantidad/mantenimiento")
+    // 3. e) Devolver cantidad de monopatines según su estado (en mantenimiento)
+    @GetMapping("/cantidad-mantenimiento")
     public ResponseEntity<Integer> getCantidadEnMantenimiento() {
         int cantidadEnMantenimiento = monopatinService.obtenerCantidadEnMantenimiento();
         return ResponseEntity.ok(cantidadEnMantenimiento);
     }
 
-    // 3. g) Cantidad de monopatines disponibles en una zona especificada.
+    // 3. g) Devolver cantidad de monopatines disponibles en una zona especificada.
     @GetMapping("/cercanos")
     public ResponseEntity<List<MonopatinDto>> obtenerMonopatinesCercanos(
             @RequestParam("latitud") Double latitud,

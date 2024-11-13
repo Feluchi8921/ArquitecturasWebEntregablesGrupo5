@@ -23,4 +23,5 @@ public class MonopatinDto {
         this.kmRecorridos = monopatin.getKmRecorridos();
         this.tiempoUso = monopatin.getTiempoUso();
     }
+
 }

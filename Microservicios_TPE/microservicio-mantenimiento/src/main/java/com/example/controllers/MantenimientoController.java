@@ -61,6 +61,8 @@ public class MantenimientoController {
         }
     }
 
+    // -------------------------------------------- Servicios --------------------------------------------
+
     @PutMapping("/iniciar/{id}")
     public ResponseEntity<?> iniciarMantenimiento(@PathVariable Long id) {
         try {
@@ -81,10 +83,11 @@ public class MantenimientoController {
         }
     }
 
-    // 3. a) Genera reporte de monopatines para verificar mantenimiento.
+    // 3. a) Generar reporte de monopatines para verificar mantenimiento.
     @GetMapping("/monopatines-reporte")
-    public ResponseEntity<?> obtenerReporteMonopatines(@RequestParam int kmMantenimiento) {
-        List<Monopatin> respuesta = mantenimientoService.obtenerReporteMonopatines(kmMantenimiento);
+    public ResponseEntity<?> obtenerReporteMonopatines(@RequestParam boolean incluirPausa) {
+        List<Object> respuesta = mantenimientoService.obtenerReporteMonopatines(incluirPausa);
         return new ResponseEntity<>(respuesta, HttpStatus.OK);
     }
+
 }

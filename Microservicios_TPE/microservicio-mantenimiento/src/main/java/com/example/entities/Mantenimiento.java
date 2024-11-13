@@ -1,6 +1,5 @@
 package com.example.entities;
 
-import com.example.model.Monopatin;
 import jakarta.persistence.*;
 import lombok.*;
 

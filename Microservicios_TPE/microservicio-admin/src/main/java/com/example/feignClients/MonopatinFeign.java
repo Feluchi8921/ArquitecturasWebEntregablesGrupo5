@@ -1,11 +1,8 @@
 package com.example.feignClients;
 
-import com.example.dto.ReporteMonopatinDto;
 import com.example.model.Monopatin;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @FeignClient(name = "microservicio-monopatin")
 public interface MonopatinFeign {
@@ -22,11 +19,11 @@ public interface MonopatinFeign {
     @DeleteMapping("api/monopatines/id/{id}")
     Monopatin deleteMonopatin(@PathVariable("id") Long id);
 
-    // 3. e) Cantidad de monopatines según su estado.
-    @GetMapping("api/monopatines/cantidad/operacion")
+    // 3. e) Devuelve la cantidad de monopatines según su estado (disponibles y no disponibles)
+    @GetMapping("api/monopatines/cantidad-operacion")
     int getCantidadEnOperacion();
 
-    @GetMapping("api/monopatines/cantidad/mantenimiento")
+    @GetMapping("api/monopatines/cantidad-mantenimiento")
     int getCantidadEnMantenimiento();
 
 }

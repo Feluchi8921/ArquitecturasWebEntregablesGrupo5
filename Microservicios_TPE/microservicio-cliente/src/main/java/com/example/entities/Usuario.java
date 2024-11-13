@@ -30,8 +30,7 @@ public class Usuario {
     )
     private List<Cuenta> cuentas;
 
-    public Usuario(Long id, String nombreUsuario, String nombre, String apellido, String nroCelular, String email) {
-        this.id = id;
+    public Usuario(String nombreUsuario, String nombre, String apellido, String nroCelular, String email) {
         this.nombreUsuario = nombreUsuario;
         this.nombre = nombre;
         this.apellido = apellido;

@@ -39,12 +39,18 @@ public class CuentaService {
             throw new RuntimeException("Son requeridos todos los campos para crear una cuenta.");
         }
 
-        // Convertir el DTO a entidad Admin
-        Cuenta nuevaCuenta = cuentaMapper.toCuenta(cuentaDto);
+        // Convertir el DTO a entidad Cuenta
+        Cuenta nuevaCuenta = new Cuenta(
+                cuentaDto.getTarifa(),
+                cuentaDto.getFechaAlta(),
+                cuentaDto.getSaldo(),
+                cuentaDto.isHabilitada()
+        );
 
-        // Si pasa las validaciones, guardar el estudiante en base de datos
+        // Guardar la cuenta en la base de datos
         Cuenta guardada = cuentaRepository.save(nuevaCuenta);
 
+        // Retornar una CuentaDto
         return cuentaMapper.toCuentaDto(guardada);
     }
 
@@ -53,11 +59,11 @@ public class CuentaService {
             throw new RuntimeException("Son requeridos todos los campos para crear una cuenta.");
         }
 
-        // Buscar el admin por ID
+        // Buscar la cuenta por ID
         Cuenta adminExistente = cuentaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Cuenta con ID " + id + " no encontrada."));
 
-        // Actualizar los campos del admin con los datos del DTO
+        // Actualizar los campos de la cuenta con los datos del DTO
         adminExistente.setTarifa(cuentaDto.getTarifa());
         adminExistente.setFechaAlta(cuentaDto.getFechaAlta());
         adminExistente.setSaldo(cuentaDto.getSaldo());
@@ -73,10 +79,10 @@ public class CuentaService {
         Cuenta cuentaEliminada = cuentaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Cuenta con ID " + id + " no encontrada."));
 
-        // Eliminar el estudiante
+        // Eliminar la cuenta
         cuentaRepository.delete(cuentaEliminada);
 
-        // Devolver el admin eliminado
+        // Devolver la cuenta eliminada
         return cuentaMapper.toCuentaDto(cuentaEliminada);
     }
 

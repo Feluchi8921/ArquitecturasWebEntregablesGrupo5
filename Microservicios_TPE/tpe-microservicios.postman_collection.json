@@ -422,17 +422,77 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:54568/api/admins/monopatines/cantidad",
+							"raw": "http://localhost:64195/api/admins/monopatines/cantidad-estado",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "54568",
+							"port": "64195",
 							"path": [
 								"api",
 								"admins",
 								"monopatines",
-								"cantidad"
+								"cantidad-estado"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Monopatines con más de X viajes en X año",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:64195/api/admins/cant-monopatines/cant-viajes/3/anio/2024",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "64195",
+							"path": [
+								"api",
+								"admins",
+								"cant-monopatines",
+								"cant-viajes",
+								"3",
+								"anio",
+								"2024"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener total facturado en un rango de meses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:64195/api/admins/total-facturado?anio=2024&mesInicio=1&mesFin=3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "64195",
+							"path": [
+								"api",
+								"admins",
+								"total-facturado"
+							],
+							"query": [
+								{
+									"key": "anio",
+									"value": "2024"
+								},
+								{
+									"key": "mesInicio",
+									"value": "1"
+								},
+								{
+									"key": "mesFin",
+									"value": "3"
+								}
 							]
 						}
 					},
@@ -635,7 +695,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"nombreUsuario\": \"pedro\",\r\n    \"nombre\": \"Pedro\",\r\n    \"apellido\": \"Perez\"\r\n}",
+											"raw": "{\r\n    \"nombreUsuario\": \"pedro\",\r\n    \"nombre\": \"Pedro\",\r\n    \"apellido\": \"Perez\",\r\n    \"nroCelular\": \"1133334444\",\r\n    \"email\": \"pedroperez@mail.com\"\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -643,12 +703,12 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:57526/api/usuarios/",
+											"raw": "http://localhost:62590/api/usuarios/",
 											"protocol": "http",
 											"host": [
 												"localhost"
 											],
-											"port": "57526",
+											"port": "62590",
 											"path": [
 												"api",
 												"usuarios",
@@ -665,7 +725,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"nombreUsuario\": \"juanse\",\r\n    \"nombre\": \"Juan\",\r\n    \"apellido\": \"Gómez\"\r\n}",
+											"raw": "{\r\n    \"nombreUsuario\": \"pablito\",\r\n    \"nombre\": \"Pablo\",\r\n    \"apellido\": \"Gómez\",\r\n    \"nroCelular\": \"1155556666\",\r\n    \"email\": \"pablogomez@mail.com\"\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -673,12 +733,12 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:50628/api/usuarios/id/1",
+											"raw": "http://localhost:62590/api/usuarios/id/1",
 											"protocol": "http",
 											"host": [
 												"localhost"
 											],
-											"port": "50628",
+											"port": "62590",
 											"path": [
 												"api",
 												"usuarios",
@@ -751,444 +811,6 @@
 											"key": "longitud",
 											"value": "120"
 										}
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				}
-			]
-		},
-		{
-			"name": "microservicio-viaje",
-			"item": [
-				{
-					"name": "crud",
-					"item": [
-						{
-							"name": "GetAllViajes",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:59752/api/viajes/",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "59752",
-									"path": [
-										"api",
-										"viajes",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "GetViajeById",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:59752/api/viajes/id/1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "59752",
-									"path": [
-										"api",
-										"viajes",
-										"id",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "CreateViajes",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"inicio\": \"2024-11-09T14:24:51\",\r\n    \"fin\": \"2024-11-09T23:15:55\",\r\n    \"kmRecorridos\": 12.0,\r\n    \"minPausa\": 5,\r\n    \"maxTiempoPausa\": 23\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:59752/api/viajes/",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "59752",
-									"path": [
-										"api",
-										"viajes",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "UpdateViaje",
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"inicio\": \"2024-11-09T14:23:15\",\r\n    \"fin\": \"2024-11-09T14:23:12\",\r\n    \"kmRecorridos\": 49.0,\r\n    \"minPausa\": 13,\r\n    \"maxTiempoPausa\": 40\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:59752/api/viajes/id/1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "59752",
-									"path": [
-										"api",
-										"viajes",
-										"id",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "DeleteViajes",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:59752/api/viajes/id/1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "59752",
-									"path": [
-										"api",
-										"viajes",
-										"id",
-										"1"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				}
-			]
-		},
-		{
-			"name": "microservicio-parada",
-			"item": [
-				{
-					"name": "crud",
-					"item": [
-						{
-							"name": "GetAllParadas",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:57596/api/paradas/",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "57596",
-									"path": [
-										"api",
-										"paradas",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "GetParadasById",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:57596/api/paradas/id/1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "57596",
-									"path": [
-										"api",
-										"paradas",
-										"id",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "CreateParada",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"nombre\": \"LA3\",\r\n    \"latitud\": 1.0,\r\n    \"longitud\": 123.0,\r\n    \"cantMaxMonopatin\": 1\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:57596/api/paradas/",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "57596",
-									"path": [
-										"api",
-										"paradas",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "DeleteParada",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:64616/api/paradas/id/4",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "64616",
-									"path": [
-										"api",
-										"paradas",
-										"id",
-										"4"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "UpdateParada",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"packages": {}
-									}
-								}
-							],
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n        \"nombre\": \"XXXXX\",\r\n        \"latitud\": 33.0,\r\n        \"longitud\": 63.0,\r\n        \"cantMaxMonopatin\": 12\r\n    }",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:64616/api/paradas/id/4",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "64616",
-									"path": [
-										"api",
-										"paradas",
-										"id",
-										"4"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				}
-			]
-		},
-		{
-			"name": "microservicio-monopatin",
-			"item": [
-				{
-					"name": "crud",
-					"item": [
-						{
-							"name": "GetAllMonopatines",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:59620/api/monopatines/",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "59620",
-									"path": [
-										"api",
-										"monopatines",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "GetMonopatinById",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:59620/api/monopatines/id/1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "59620",
-									"path": [
-										"api",
-										"monopatines",
-										"id",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "CreateMonopatin",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"estado\": \"Inactivo\",\r\n    \"latitud\": 41.712776,\r\n    \"longitud\": -44.005974,\r\n    \"kmRecorridos\": 1250.5,\r\n    \"tiempoUso\": 2220.5\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:59620/api/monopatines/",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "59620",
-									"path": [
-										"api",
-										"monopatines",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "UpdateMonopatin",
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"estado\": \"En mantenimiento\",\r\n    \"latitud\": 122.3,\r\n    \"longitud\": 3434.3,\r\n    \"kmRecorridos\": 22.0,\r\n    \"tiempoUso\": 2.0\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:59620/api/monopatines/id/1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "59620",
-									"path": [
-										"api",
-										"monopatines",
-										"id",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "DeleteMonopatin",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:59620/api/monopatines/id/1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "59620",
-									"path": [
-										"api",
-										"monopatines",
-										"id",
-										"1"
 									]
 								}
 							},
@@ -1382,12 +1004,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:58616/api/mantenimientos/monopatines-reporte?kmMantenimiento=30",
+							"raw": "http://localhost:64966/api/mantenimientos/monopatines-reporte?incluirPausa=true",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "58616",
+							"port": "64966",
 							"path": [
 								"api",
 								"mantenimientos",
@@ -1395,13 +1017,451 @@
 							],
 							"query": [
 								{
-									"key": "kmMantenimiento",
-									"value": "30"
+									"key": "incluirPausa",
+									"value": "true"
 								}
 							]
 						}
 					},
 					"response": []
+				}
+			]
+		},
+		{
+			"name": "microservicio-monopatin",
+			"item": [
+				{
+					"name": "crud",
+					"item": [
+						{
+							"name": "GetAllMonopatines",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:59620/api/monopatines/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "59620",
+									"path": [
+										"api",
+										"monopatines",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetMonopatinById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:59620/api/monopatines/id/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "59620",
+									"path": [
+										"api",
+										"monopatines",
+										"id",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CreateMonopatin",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"estado\": \"Inactivo\",\r\n    \"latitud\": 41.712776,\r\n    \"longitud\": -44.005974,\r\n    \"kmRecorridos\": 1250.5,\r\n    \"tiempoUso\": 2220.5\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:59620/api/monopatines/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "59620",
+									"path": [
+										"api",
+										"monopatines",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateMonopatin",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"estado\": \"En mantenimiento\",\r\n    \"latitud\": 122.3,\r\n    \"longitud\": 3434.3,\r\n    \"kmRecorridos\": 22.0,\r\n    \"tiempoUso\": 2.0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:59620/api/monopatines/id/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "59620",
+									"path": [
+										"api",
+										"monopatines",
+										"id",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteMonopatin",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:59620/api/monopatines/id/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "59620",
+									"path": [
+										"api",
+										"monopatines",
+										"id",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "microservicio-parada",
+			"item": [
+				{
+					"name": "crud",
+					"item": [
+						{
+							"name": "GetAllParadas",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:57596/api/paradas/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "57596",
+									"path": [
+										"api",
+										"paradas",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetParadasById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:57596/api/paradas/id/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "57596",
+									"path": [
+										"api",
+										"paradas",
+										"id",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CreateParada",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"LA3\",\r\n    \"latitud\": 1.0,\r\n    \"longitud\": 123.0,\r\n    \"cantMaxMonopatin\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:57596/api/paradas/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "57596",
+									"path": [
+										"api",
+										"paradas",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteParada",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:64616/api/paradas/id/4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "64616",
+									"path": [
+										"api",
+										"paradas",
+										"id",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateParada",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"nombre\": \"XXXXX\",\r\n        \"latitud\": 33.0,\r\n        \"longitud\": 63.0,\r\n        \"cantMaxMonopatin\": 12\r\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:64616/api/paradas/id/4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "64616",
+									"path": [
+										"api",
+										"paradas",
+										"id",
+										"4"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "microservicio-viaje",
+			"item": [
+				{
+					"name": "crud",
+					"item": [
+						{
+							"name": "GetAllViajes",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:59752/api/viajes/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "59752",
+									"path": [
+										"api",
+										"viajes",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetViajeById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:59752/api/viajes/id/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "59752",
+									"path": [
+										"api",
+										"viajes",
+										"id",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CreateViajes",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"inicio\": \"2024-11-09T14:24:51\",\r\n    \"fin\": \"2024-11-09T23:15:55\",\r\n    \"kmRecorridos\": 12.0,\r\n    \"minPausa\": 5,\r\n    \"maxTiempoPausa\": 23\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:59752/api/viajes/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "59752",
+									"path": [
+										"api",
+										"viajes",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateViaje",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"inicio\": \"2024-11-09T14:23:15\",\r\n    \"fin\": \"2024-11-09T14:23:12\",\r\n    \"kmRecorridos\": 49.0,\r\n    \"minPausa\": 13,\r\n    \"maxTiempoPausa\": 40\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:59752/api/viajes/id/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "59752",
+									"path": [
+										"api",
+										"viajes",
+										"id",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteViajes",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:59752/api/viajes/id/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "59752",
+									"path": [
+										"api",
+										"viajes",
+										"id",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		}

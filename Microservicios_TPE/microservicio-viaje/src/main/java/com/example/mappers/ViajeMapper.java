@@ -7,10 +7,10 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface ViajeMapper {
 
-    //Convierte un viaje a viajeDto
+    // Convierte un viaje a viajeDto
     ViajeDto toViajeDto(Viaje viaje);
 
-    //Convierte un viajeDto a viaje
+    // Convierte un viajeDto a viaje
     Viaje toViaje(ViajeDto viajeDto);
 
 }

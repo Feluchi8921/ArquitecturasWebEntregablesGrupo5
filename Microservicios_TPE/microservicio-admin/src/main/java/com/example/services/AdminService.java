@@ -1,8 +1,6 @@
 package com.example.services;
 
-import com.example.dto.AdminDto;
-import com.example.dto.CantidadMonopatinesEstadoDto;
-import com.example.dto.TarifaRequestDto;
+import com.example.dto.*;
 import com.example.entities.Admin;
 import com.example.feignClients.*;
 import com.example.mappers.AdminMapper;
@@ -54,10 +52,10 @@ public class AdminService {
             throw new RuntimeException("Todos los campos son requeridos para crear un administrador.");
         }
 
-        // Convertir el DTO a entidad Admin
+        // Convertir AdminDTO a entidad Admin
         Admin nuevoAdmin = adminMapper.toAdmin(adminDto);
 
-        // Si pasa las validaciones, guardar el estudiante en base de datos
+        // Si pasa las validaciones, guardar el administrador en base de datos
         Admin guardado = adminRepository.save(nuevoAdmin);
 
         return adminMapper.toAdminDto(guardado);
@@ -82,6 +80,7 @@ public class AdminService {
         // Guardar los cambios
         adminRepository.save(adminExistente);
 
+        // Devolver el adminDto
         return adminMapper.toAdminDto(adminExistente);
     }
 
@@ -89,7 +88,7 @@ public class AdminService {
         Admin adminExistente = adminRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Administrador con ID " + id + " no encontrado."));
 
-        // Eliminar el estudiante
+        // Eliminar el admin
         adminRepository.delete(adminExistente);
 
         // Devolver el admin eliminado
@@ -100,7 +99,7 @@ public class AdminService {
 
     // ------------------------------------------------ Servicios ------------------------------------------------
 
-    // 3. b) Anula cuentas para inhabilitar el uso momentáneo de la misma.
+    // 3. b) Anula cuentas para inhabilitar el uso momentáneo de las mismas.
     @Transactional
     public void cambiarEstadoCuenta(Long id, boolean estado) {
         try {
@@ -166,6 +165,16 @@ public class AdminService {
 
     // ------------------------------------- Servicios -------------------------------------
 
+    // 3. c) Cantidad de monopatines con más viajes que una cantidad dada en un determinado año.
+    public List<CantViajesMonopatinDto> monopatinesCantViajesAnio(Integer cantViajes, Integer anio) {
+        return viajeFeign.monopatinesCantViajesAnio(cantViajes, anio);
+    }
+
+    // 3. d) Obtener total facturado en un rango de meses un cierto año.
+    public TotalFacturadoDto obtenerTotalFacturado(Integer anio, Integer mesInicio, Integer mesFin) {
+        return viajeFeign.obtenerTotalFacturado(anio, mesInicio, mesFin);
+    }
+    
     // 3. e) Cantidad de monopatines según su estado
     public CantidadMonopatinesEstadoDto obtenerCantidadMonopatines() {
         int cantidadEnOperacion = monopatinFeign.getCantidadEnOperacion();
@@ -183,6 +192,7 @@ public class AdminService {
         }
     }
 
+    // 3. f) Modifica la tarifa extra de los viajes.
     @Transactional
     public void modificarTarifaExtra(TarifaRequestDto tarifaDto) {
         try {

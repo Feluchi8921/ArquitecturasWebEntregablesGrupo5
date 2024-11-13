@@ -1,20 +1,24 @@
 package com.example.services;
 
 import com.example.dto.MantenimientoDto;
+import com.example.dto.MonopatinConPausaDto;
+import com.example.dto.MonopatinSinPausaDto;
 import com.example.entities.Mantenimiento;
 import com.example.feignClients.*;
 import com.example.mappers.MantenimientoMapper;
-import com.example.model.Monopatin;
 import com.example.repository.MantenimientoRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class MantenimientoService {
@@ -25,6 +29,8 @@ public class MantenimientoService {
     MantenimientoMapper mantenimientoMapper;
     @Autowired
     MonopatinFeign monopatinFeign;
+    @Autowired
+    ViajeFeign viajeFeign;
 
     @Transactional(readOnly = true)
     public List<MantenimientoDto> findAll() {
@@ -49,7 +55,8 @@ public class MantenimientoService {
                 mantenimientoDto.getDescripcion().isEmpty()) {
             throw new RuntimeException("Todos los campos son requeridos para crear un mantenimiento" + ".");
         }
-        // Convierte LocalDateTime a String para JSON
+
+        // Convertir LocalDateTime a String para JSON
         String inicioStr = mantenimientoDto.getInicio().format(DateTimeFormatter.ISO_LOCAL_DATE);
         String finStr = mantenimientoDto.getFin().format(DateTimeFormatter.ISO_LOCAL_DATE);
 
@@ -103,9 +110,17 @@ public class MantenimientoService {
         }
     }
 
-    // 3. a) Genera reporte de monopatines para verificar mantenimiento.
-    public List<Monopatin> obtenerReporteMonopatines(int kmMantenimiento) {
-        return monopatinFeign.obtenerReporte(kmMantenimiento);
+    // 3. a) Generar reporte de monopatines para verificar mantenimiento.
+    public List<Object> obtenerReporteMonopatines(boolean incluirPausa) {
+        if (incluirPausa) {
+            List<MonopatinConPausaDto> monopatinesConPausa = viajeFeign.reporteMonopatinesConPausa();
+            log.info(monopatinesConPausa.toString());
+            return new ArrayList<>(monopatinesConPausa);
+        } else {
+            List<MonopatinSinPausaDto> monopatinesSinPausa = viajeFeign.reporteMonopatinesSinPausa();
+            log.info(monopatinesSinPausa.toString());
+            return new ArrayList<>(monopatinesSinPausa);
+        }
     }
 
 }

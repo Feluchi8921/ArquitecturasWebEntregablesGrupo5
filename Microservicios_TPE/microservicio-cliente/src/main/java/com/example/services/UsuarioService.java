@@ -46,10 +46,15 @@ public class UsuarioService {
             throw new RuntimeException("Todos los campos son requeridos para crear un usuario.");
         }
 
-        // Convertir el DTO a entidad Usuario
-        Usuario nuevoUsuario = usuarioMapper.toUsuario(usuarioDto);
+        Usuario nuevoUsuario = new Usuario(
+                usuarioDto.getNombreUsuario(),
+                usuarioDto.getNombre(),
+                usuarioDto.getApellido(),
+                usuarioDto.getNroCelular(),
+                usuarioDto.getEmail()
+        );
 
-        // Si pasa las validaciones, guardar el estudiante en base de datos
+        // Guardar el usuario en base de datos
         Usuario guardado = usuarioRepository.save(nuevoUsuario);
 
         // Retornar UsuarioDto
@@ -64,11 +69,11 @@ public class UsuarioService {
             throw new RuntimeException("Todos los campos son requeridos para crear un usuario.");
         }
 
-        // Buscar el admin por ID
+        // Buscar el usuario por ID
         Usuario usuarioExistente = usuarioRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuario con ID " + id + " no encontrado"));
 
-        // Actualizar los campos del admin con los datos del DTO
+        // Actualizar los campos del usuario con los datos del DTO
         usuarioExistente.setNombreUsuario(usuarioDto.getNombreUsuario());
         usuarioExistente.setNombre(usuarioDto.getNombre());
         usuarioExistente.setApellido(usuarioDto.getApellido());
@@ -84,10 +89,10 @@ public class UsuarioService {
         Usuario usuarioEliminado = usuarioRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuario con ID " + id + " no encontrado"));
 
-        // Eliminar el estudiante
+        // Eliminar el usuario
         usuarioRepository.delete(usuarioEliminado);
 
-        // Devolver el admin eliminado
+        // Devolver el usuario eliminado
         return usuarioMapper.toUsuarioDto(usuarioEliminado);
     }
 

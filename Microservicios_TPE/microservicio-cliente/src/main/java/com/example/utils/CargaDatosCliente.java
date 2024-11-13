@@ -21,11 +21,11 @@ public class CargaDatosCliente {
                                   @Qualifier("cuentaRepository") CuentaRepository cuentaRepository) {
         return args -> {
             // Guardar un nuevo Usuario
-            Usuario usuario = new Usuario(1L, "armando1956", "Armando", "Paredes", "12345678", "armandoparedes@mail.com");
+            Usuario usuario = new Usuario("armando1956", "Armando", "Paredes", "12345678", "armandoparedes@mail.com");
             log.info("Preloading " + usuarioRepository.save(usuario));
 
             // Guardar una nueva Cuenta
-            Cuenta cuenta = new Cuenta(1L, 10500.0, LocalDate.of(2020, 3, 15), 9500.0, true);
+            Cuenta cuenta = new Cuenta(10500.0, LocalDate.of(2020, 3, 15), 9500.0, true);
             log.info("Preloading " + cuentaRepository.save(cuenta));
         };
     }

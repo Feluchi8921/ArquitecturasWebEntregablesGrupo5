@@ -12,13 +12,9 @@ import java.time.LocalDateTime;
 public class ViajeDto {
 
     private LocalDateTime inicio;
-
     private LocalDateTime fin;
-
     private Double kmRecorridos;
-
     private Integer minPausa;
-
     private Integer maxTiempoPausa;
 
     public ViajeDto(Viaje viaje) {

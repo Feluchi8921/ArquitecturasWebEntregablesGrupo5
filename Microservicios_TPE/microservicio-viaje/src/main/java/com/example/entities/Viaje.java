@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Viaje {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -36,4 +37,10 @@ public class Viaje {
 
     @Column(nullable = false)
     private Integer maxTiempoPausa;
+
+    @Column(nullable = false)
+    private Long idMonopatin;
+
+    @Column(nullable = false)
+    private Long idCuenta;
 }

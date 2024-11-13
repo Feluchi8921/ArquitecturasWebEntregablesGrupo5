@@ -11,16 +11,10 @@ import java.util.List;
 @Repository
 public interface MonopatinRepository extends JpaRepository<Monopatin, Long> {
 
-    // 3. a) Genera reporte de monopatines para verificar mantenimiento.
-    @Query("SELECT m " +
-            "FROM Monopatin m " +
-            "WHERE m.kmRecorridos >= :kmMantenimiento")
-    List<Monopatin> generarReporteMantenimiento(@Param("kmMantenimiento") int kmMantenimiento);
-
-    // 3. e) Cantidad de monopatines según su estado.
+    // 3. e) Devolver cantidad de monopatines según su estado.
     int countByEstado(String estado);
 
-    // 3. g) Cantidad de monopatines disponibles en una zona especificada (un kilómetro a la redonda).
+    // 3. g) Devolver cantidad de monopatines disponibles en una zona especificada.
     @Query("SELECT m " +
             "FROM Monopatin m " +
             "WHERE :latitud BETWEEN (m.latitud - 1000) AND (m.latitud + 1000) " +
