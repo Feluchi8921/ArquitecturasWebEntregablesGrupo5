@@ -21,7 +21,7 @@ public class ParadaController {
     }
 
     @GetMapping("/id/{id}")
-    public ResponseEntity<?> getById(@PathVariable Long id) {
+    public ResponseEntity<?> getById(@PathVariable String id) {
         try {
             ParadaDto parada = paradaService.findById(id);
             return ResponseEntity.ok(parada);
@@ -41,7 +41,7 @@ public class ParadaController {
     }
 
     @PutMapping("/id/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody ParadaDto parada) {
+    public ResponseEntity<?> update(@PathVariable String id, @RequestBody ParadaDto parada) {
         try {
             ParadaDto paradaDtoModificado = paradaService.update(id, parada);
             return ResponseEntity.status(HttpStatus.CREATED).body(paradaDtoModificado);
@@ -51,7 +51,7 @@ public class ParadaController {
     }
 
     @DeleteMapping("/id/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
+    public ResponseEntity<?> delete(@PathVariable String id) {
         try {
             ParadaDto paradaDtoEliminado = paradaService.delete(id);
             return ResponseEntity.ok(paradaDtoEliminado);

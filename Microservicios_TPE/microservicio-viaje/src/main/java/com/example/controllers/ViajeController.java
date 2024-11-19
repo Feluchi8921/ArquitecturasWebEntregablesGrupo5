@@ -63,6 +63,8 @@ public class ViajeController {
         }
     }
 
+    // -------------------------------------------------- Servicios --------------------------------------------------
+
     @PutMapping("/tarifa-normal/")
     public ResponseEntity<?> modificarTarifaNormal(@RequestBody TarifaDto tarifaDto) {
         viajeService.modificarTarifaNormal(tarifaDto);

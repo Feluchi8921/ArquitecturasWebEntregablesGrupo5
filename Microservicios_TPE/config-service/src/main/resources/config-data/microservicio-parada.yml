@@ -3,16 +3,11 @@ server:
 spring:
   application:
     name: microservicio-parada
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3310/paradas?createDatabaseIfNotExist=true
-    username: root
-    password: 1234
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-    database: mysql
+  data:
+    mongodb:
+      uri: mongodb://root:1234@localhost:27017/paradas?authSource=admin
+      username: root
+      password: 1234
 eureka:
   client:
     fetch-registry: true

@@ -43,4 +43,5 @@ public class Viaje {
 
     @Column(nullable = false)
     private Long idCuenta;
+
 }

@@ -2,19 +2,26 @@ package com.example.services;
 
 import com.example.dto.*;
 import com.example.entities.Admin;
-import com.example.feignClients.*;
+import com.example.feignClients.CuentaFeign;
+import com.example.feignClients.MonopatinFeign;
+import com.example.feignClients.ParadaFeign;
+import com.example.feignClients.ViajeFeign;
 import com.example.mappers.AdminMapper;
 import com.example.model.Monopatin;
 import com.example.model.Parada;
 import com.example.repository.AdminRepository;
 import feign.FeignException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.Year;
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class AdminService {
@@ -50,6 +57,11 @@ public class AdminService {
         if (adminDto.getNombre().isEmpty() || adminDto.getApellido().isEmpty() ||
                 adminDto.getDni().isEmpty() || adminDto.getContrasenia().isEmpty()) {
             throw new RuntimeException("Todos los campos son requeridos para crear un administrador.");
+        }
+
+        if (adminRepository.existsByDni(adminDto.getDni())) {
+            log.info("Ya existe un admin con el mismo número de DNI.");
+            throw new IllegalArgumentException("Ya existe un admin con el mismo número de DNI.");
         }
 
         // Convertir AdminDTO a entidad Admin
@@ -163,28 +175,40 @@ public class AdminService {
         }
     }
 
-    // ------------------------------------- Servicios -------------------------------------
-
     // 3. c) Cantidad de monopatines con más viajes que una cantidad dada en un determinado año.
     public List<CantViajesMonopatinDto> monopatinesCantViajesAnio(Integer cantViajes, Integer anio) {
+        if (anio < 0 || anio > Year.now().getValue()) {
+            throw new IllegalArgumentException("Año inválido.");
+        } else if (cantViajes < 0) {
+            throw new IllegalArgumentException("Cantidad inválida de viajes.");
+        }
         return viajeFeign.monopatinesCantViajesAnio(cantViajes, anio);
     }
 
     // 3. d) Obtener total facturado en un rango de meses un cierto año.
     public TotalFacturadoDto obtenerTotalFacturado(Integer anio, Integer mesInicio, Integer mesFin) {
+        if (anio < 0 || anio > Year.now().getValue()) {
+            throw new IllegalArgumentException("Año inválido.");
+        } else if ((mesInicio < 1 || mesInicio > 12) || (mesFin < 1 || mesFin > 12) || mesInicio > mesFin) {
+            throw new IllegalArgumentException("Rango inválido de meses.");
+        }
         return viajeFeign.obtenerTotalFacturado(anio, mesInicio, mesFin);
     }
     
     // 3. e) Cantidad de monopatines según su estado
     public CantidadMonopatinesEstadoDto obtenerCantidadMonopatines() {
-        int cantidadEnOperacion = monopatinFeign.getCantidadEnOperacion();
-        int cantidadEnMantenimiento = monopatinFeign.getCantidadEnMantenimiento();
+        int cantidadEnOperacion = monopatinFeign.obtenerCantidadEnOperacion();
+        int cantidadEnMantenimiento = monopatinFeign.obtenerCantidadEnMantenimiento();
         return new CantidadMonopatinesEstadoDto(cantidadEnOperacion, cantidadEnMantenimiento);
     }
 
     // 3. f) Modifica la tarifa normal de los viajes.
     @Transactional
     public void modificarTarifaNormal(TarifaRequestDto tarifaDto) {
+        if (tarifaDto.getNuevoValor() < 0 || tarifaDto.getFechaActualizacion().isBefore(LocalDate.now())) {
+            throw new IllegalArgumentException("La nueva tarifa ingresada es inválida.");
+        }
+
         try {
             viajeFeign.modificarTarifaNormal(tarifaDto);
         } catch (Exception e) {
@@ -195,6 +219,10 @@ public class AdminService {
     // 3. f) Modifica la tarifa extra de los viajes.
     @Transactional
     public void modificarTarifaExtra(TarifaRequestDto tarifaDto) {
+        if (tarifaDto.getNuevoValor() < 0 || tarifaDto.getFechaActualizacion().isBefore(LocalDate.now())) {
+            throw new IllegalArgumentException("La nueva tarifa ingresada es inválida.");
+        }
+
         try {
             viajeFeign.modificarTarifaExtra(tarifaDto);
         } catch (Exception e) {

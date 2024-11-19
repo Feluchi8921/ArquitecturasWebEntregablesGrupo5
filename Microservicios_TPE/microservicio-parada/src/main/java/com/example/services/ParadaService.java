@@ -4,53 +4,48 @@ import com.example.dto.ParadaDto;
 import com.example.entities.Parada;
 import com.example.mappers.ParadaMapper;
 import com.example.repository.ParadaRepository;
-import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class ParadaService {
 
     @Autowired
     ParadaRepository paradaRepository;
+
     @Autowired
     ParadaMapper paradaMapper;
 
-    @Transactional
     public List<ParadaDto> findAll() {
         return this.paradaRepository.findAll()
-                .stream().map(ParadaDto::new).toList();
+                .stream().map(paradaMapper::toParadaDto).toList();
     }
 
-    @Transactional
-    public ParadaDto findById(Long id){
+    public ParadaDto findById(String id) {
         return this.paradaRepository.findById(id)
-                .map(ParadaDto::new)
-                .orElseThrow(()-> new RuntimeException("Parada con ID " + id + " no encontrado"));
+                .map(paradaMapper::toParadaDto)
+                .orElseThrow(() -> new RuntimeException("Parada con ID " + id + " no encontrado"));
     }
 
-    @Transactional
     public ParadaDto save(ParadaDto paradaDto) {
         if (paradaDto.getNombre().isEmpty() || paradaDto.getLatitud() == 0.0  || paradaDto.getLongitud() == 0.0 || paradaDto.getCantMaxMonopatin() == null ) {
-            throw new RuntimeException("Todos los campos son requeridos para crear un administrador.");
+            throw new RuntimeException("Todos los campos son requeridos para crear una parada.");
         }
 
-        // Convertir el DTO a entidad Admin
-        Parada nuevoAdmin = paradaMapper.toParada(paradaDto);
+        // Convertir el DTO a entidad Parada
+        Parada nuevaParada = paradaMapper.toParada(paradaDto);
 
-        // Si pasa las validaciones, guardar el estudiante en base de datos
-        Parada guardado = paradaRepository.save(nuevoAdmin);
+        // Guardar la parada en la base de datos
+        Parada guardada = paradaRepository.save(nuevaParada);
 
-        return paradaMapper.toParadaDto(guardado);
+        return paradaMapper.toParadaDto(guardada);
     }
 
-    public ParadaDto update(Long id, ParadaDto paradaDto) {
+    public ParadaDto update(String id, ParadaDto paradaDto) {
         if (paradaDto.getNombre().isEmpty() || paradaDto.getLatitud() == 0.0  || paradaDto.getLongitud() == 0.0 || paradaDto.getCantMaxMonopatin() == null ) {
-            throw new RuntimeException("Todos los campos son requeridos para modificar un parada.");
+            throw new RuntimeException("Todos los campos son requeridos para modificar una parada.");
         }
 
         // Buscar la parada por ID
@@ -68,15 +63,14 @@ public class ParadaService {
         return paradaMapper.toParadaDto(paradaExistente);
     }
 
-    public ParadaDto delete(Long id) {
+    public ParadaDto delete(String id) {
         Parada paradaExistente = paradaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Parada con ID " + id + " no encontrado"));
 
-        // Eliminar el estudiante
+        // Eliminar la parada
         paradaRepository.delete(paradaExistente);
 
-        // Devolver el admin eliminado
+        // Devolver la parada eliminada
         return paradaMapper.toParadaDto(paradaExistente);
     }
-
 }

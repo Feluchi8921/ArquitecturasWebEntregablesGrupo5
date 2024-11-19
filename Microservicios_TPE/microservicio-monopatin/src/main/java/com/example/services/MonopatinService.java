@@ -98,7 +98,8 @@ public class MonopatinService {
 
     // 3. g) Obtener cantidad de monopatines disponibles en una zona especificada.
     public List<MonopatinDto> obtenerMonopatinesCercanos(double latitud, double longitud) {
-        List<Monopatin> monopatines = monopatinRepository.findMonopatinesCercanos(latitud, longitud);
+        double rango = 1000;
+        List<Monopatin> monopatines = monopatinRepository.findMonopatinesCercanos(latitud, longitud, rango);
 
         return monopatines.stream()
                 .map(monopatin -> new MonopatinDto(

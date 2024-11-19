@@ -15,6 +15,9 @@
 	<name>tpe_microservicios</name>
 	<description>Trabajo Practico Especial - Arquitectura Web (Grupo 5)</description>
 	<modules>
+		<module>config-service</module>
+		<module>eureka-service</module>
+		<module>gateway</module>
 		<module>microservicio-admin</module>
 		<module>microservicio-cliente</module>
 		<module>microservicio-mantenimiento</module>
@@ -64,7 +67,24 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-openfeign</artifactId>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.6.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-test</artifactId>
+		</dependency>
 	</dependencies>
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>

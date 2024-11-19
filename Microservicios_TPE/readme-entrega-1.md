@@ -1,8 +1,8 @@
 # Arquitecturas Web (TUDAI)
-# Trabajo Práctico Especial: Aplicación para Monopatines Elétricos
+# Trabajo Práctico Especial: Aplicación para Monopatines Eléctricos
 
 ### Descripción
-Este proyecto implementa un diseño e implementación de un sistema abordado con la estructura de microservicios.
+Este proyecto consta de un diseño e implementación de un sistema abordado con la estructura de microservicios utilizando Spring Boot.
 El servicio está compuesto por los microservicios: 
 * microservicio-admin
 * microservicio-cliente
@@ -13,7 +13,7 @@ El servicio está compuesto por los microservicios:
 
 ***Nota: En la raíz del proyecto se encuentra **postman_collection.json** con los endpoints***
 
-***Importante!!!*** Antes de correr los microservicios asegurarse de levantar todos los archivos Dockers contenidos en cada microservicio
+***Importante!!!*** Antes de correr los microservicios asegurarse de levantar todos los archivos Docker contenidos en cada microservicio
 ***Luego correr cada aplicación en este orden:*** ConfigServiceApplication, EurekaServiceApplication, GatewayApplication y luego cada microservicio. De esta manera podrá realizar las consultas con los datos precargados.
 
 #### Diagrama de microservicios:
@@ -22,20 +22,20 @@ El servicio está compuesto por los microservicios:
 #### Diagrama de tablas:
 ![Diagrama-tablas](images/Diagrama-tablas.png)
 
-### CRUD de microservicio-monopatin. Ejemplo de uso (se utiliza la misma lógica para probar los otros microservicios)
+### CRUD de microservicio-monopatin. Ejemplo de uso con puertos dinámicos:
 
 ### Gestión de Monopatines (cambiar al puerto de ejecución ya que es dinámico)
 
 * **A) Recuperar todos los monopatines**
 * **Método:**  GET
 	* **URL:** http://localhost:57270/api/monopatines/
-	* **Respuesta:** JSON con todos los viajes
+	* **Respuesta:** JSON con todos los monopatines
 
 	
 * **B) Recuperar un monopatines por id**
 * **Método:**  GET
 	* **URL:** http://localhost:57270/api/monopatines/id/1
-	* **Respuesta:** JSON con un viaje
+	* **Respuesta:** JSON con un monopatín
 
 
 

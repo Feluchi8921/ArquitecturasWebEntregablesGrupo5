@@ -4,8 +4,14 @@ import com.example.model.Monopatin;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @FeignClient(name = "microservicio-monopatin")
 public interface MonopatinFeign {
+
+    // Obtiene los monopatines
+    @GetMapping("api/monopatines/")
+    List<Monopatin> getAllMonopatines();
 
     // Agrega un monopatín
     @PostMapping("api/monopatines/")
@@ -21,9 +27,9 @@ public interface MonopatinFeign {
 
     // 3. e) Devuelve la cantidad de monopatines según su estado (disponibles y no disponibles)
     @GetMapping("api/monopatines/cantidad-operacion")
-    int getCantidadEnOperacion();
+    int obtenerCantidadEnOperacion();
 
     @GetMapping("api/monopatines/cantidad-mantenimiento")
-    int getCantidadEnMantenimiento();
+    int obtenerCantidadEnMantenimiento();
 
 }

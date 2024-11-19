@@ -24,9 +24,15 @@ public class CargaDatosCliente {
             Usuario usuario = new Usuario("armando1956", "Armando", "Paredes", "12345678", "armandoparedes@mail.com");
             log.info("Preloading " + usuarioRepository.save(usuario));
 
+            Usuario usuario2 = new Usuario("pepe", "José", "García", "23546987", "josecito@mail.com");
+            log.info("Preloading " + usuarioRepository.save(usuario2));
+
             // Guardar una nueva Cuenta
             Cuenta cuenta = new Cuenta(10500.0, LocalDate.of(2020, 3, 15), 9500.0, true);
             log.info("Preloading " + cuentaRepository.save(cuenta));
+
+            Cuenta cuenta2 = new Cuenta(10800.0, LocalDate.of(2021, 6, 11), 10500.0, true);
+            log.info("Preloading " + cuentaRepository.save(cuenta2));
         };
     }
 

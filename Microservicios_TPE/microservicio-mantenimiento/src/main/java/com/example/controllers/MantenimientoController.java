@@ -1,7 +1,6 @@
 package com.example.controllers;
 
 import com.example.dto.MantenimientoDto;
-import com.example.model.Monopatin;
 import com.example.services.MantenimientoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

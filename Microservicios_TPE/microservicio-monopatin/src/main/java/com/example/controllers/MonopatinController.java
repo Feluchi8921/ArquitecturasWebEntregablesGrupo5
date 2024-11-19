@@ -85,23 +85,22 @@ public class MonopatinController {
 
     // 3. e) Devolver cantidad de monopatines según su estado (en operación)
     @GetMapping("/cantidad-operacion")
-    public ResponseEntity<Integer> getCantidadEnOperacion() {
+    public ResponseEntity<Integer> obtenerCantidadEnOperacion() {
         int cantidadEnOperacion = monopatinService.obtenerCantidadEnOperacion();
         return ResponseEntity.ok(cantidadEnOperacion);
     }
 
     // 3. e) Devolver cantidad de monopatines según su estado (en mantenimiento)
     @GetMapping("/cantidad-mantenimiento")
-    public ResponseEntity<Integer> getCantidadEnMantenimiento() {
+    public ResponseEntity<Integer> obtenerCantidadEnMantenimiento() {
         int cantidadEnMantenimiento = monopatinService.obtenerCantidadEnMantenimiento();
         return ResponseEntity.ok(cantidadEnMantenimiento);
     }
 
     // 3. g) Devolver cantidad de monopatines disponibles en una zona especificada.
     @GetMapping("/cercanos")
-    public ResponseEntity<List<MonopatinDto>> obtenerMonopatinesCercanos(
-            @RequestParam("latitud") Double latitud,
-            @RequestParam("longitud") Double longitud) {
+    public ResponseEntity<List<MonopatinDto>> obtenerMonopatinesCercanos(@RequestParam("latitud") Double latitud,
+                                                                         @RequestParam("longitud") Double longitud) {
         List<MonopatinDto> monopatines = monopatinService.obtenerMonopatinesCercanos(latitud, longitud);
         return ResponseEntity.ok(monopatines);
     }

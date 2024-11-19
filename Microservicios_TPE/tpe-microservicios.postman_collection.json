@@ -1228,7 +1228,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"nombre\": \"LA3\",\r\n    \"latitud\": 1.0,\r\n    \"longitud\": 123.0,\r\n    \"cantMaxMonopatin\": 1\r\n}",
+									"raw": "{\r\n    \"nombre\": \"Parada F\",\r\n    \"latitud\": 1.0,\r\n    \"longitud\": 123.0,\r\n    \"cantMaxMonopatin\": 20\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1246,28 +1246,6 @@
 										"api",
 										"paradas",
 										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "DeleteParada",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:64616/api/paradas/id/4",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "64616",
-									"path": [
-										"api",
-										"paradas",
-										"id",
-										"4"
 									]
 								}
 							},
@@ -1292,7 +1270,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n        \"nombre\": \"XXXXX\",\r\n        \"latitud\": 33.0,\r\n        \"longitud\": 63.0,\r\n        \"cantMaxMonopatin\": 12\r\n    }",
+									"raw": "{\r\n    \"nombre\": \"Parada A\",\r\n    \"latitud\": 33.0,\r\n    \"longitud\": 63.0,\r\n    \"cantMaxMonopatin\": 12\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1300,7 +1278,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:64616/api/paradas/id/4",
+									"raw": "http://localhost:64616/api/paradas/id/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -1310,7 +1288,29 @@
 										"api",
 										"paradas",
 										"id",
-										"4"
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteParada",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:64616/api/paradas/id/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "64616",
+									"path": [
+										"api",
+										"paradas",
+										"id",
+										"1"
 									]
 								}
 							},
@@ -1462,6 +1462,191 @@
 							"response": []
 						}
 					]
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "Autenticación de Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"armando\",\r\n    \"password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/api/authenticate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"api",
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Prueba de permisos para Admins",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhcm1hbmRvIiwiYXV0aCI6IkFETUlOIiwiZXhwIjoxNzMxODcyNDY1LCJpYXQiOjE3MzE3ODYwNjV9.YHe2U3V5zHd_isuO2oDxW6UNaFB3uUAii9vYTJDbxnhFYlJlW-dhJ2Zj9oUtJOE_-_TCFHsoVRq91znLItjQOw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:2000/api/admins/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"api",
+								"admins",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Autenticación de Mantenimiento",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"ricardo\",\r\n    \"password\": \"2345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/api/authenticate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"api",
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Prueba de permisos para Mantenimiento",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyaWNhcmRvIiwiYXV0aCI6Ik1BTlRFTklNSUVOVE8iLCJleHAiOjE3MzE4NzM0MTgsImlhdCI6MTczMTc4NzAxOH0.w6FLAOzVi5_mVTl5pUkUsGTsRh8hKAT066Hc3UHkTMV8xX15l7gs0WxmBwHf4xwexDceLi-WVfq31CTRl3SHdA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:2000/api/admins/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"api",
+								"admins",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Autenticación para User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"carla\",\r\n    \"password\": \"3456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/api/authenticate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"api",
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Prueba de permisos para User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjYXJsYSIsImF1dGgiOiJVU0VSIiwiZXhwIjoxNzMxODc0MzQxLCJpYXQiOjE3MzE3ODc5NDF9.1DcUrRvRs9alWx0-6eHPXU-nQmwtrTFyqBSogrv6BEyqznw1Ot0Og3GPdvwi5UKzcpvBfcWqKOZSN-6-d1_UUw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:2000/api/monopatines/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"api",
+								"monopatines",
+								""
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}

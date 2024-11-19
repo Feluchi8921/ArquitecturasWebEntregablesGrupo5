@@ -1,30 +1,25 @@
 package com.example.entities;
 
-import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
+@Document(collection = "paradas") // Especifica la colección en MongoDB
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class Parada {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
-    @Column(nullable = false)
     private String nombre;
 
-    @Column(nullable = false)
     private double latitud;
 
-    @Column(nullable = false)
     private double longitud;
 
-    @Column(nullable = false)
     private Integer cantMaxMonopatin;
 
 }

@@ -17,9 +17,10 @@ public interface MonopatinRepository extends JpaRepository<Monopatin, Long> {
     // 3. g) Devolver cantidad de monopatines disponibles en una zona especificada.
     @Query("SELECT m " +
             "FROM Monopatin m " +
-            "WHERE :latitud BETWEEN (m.latitud - 1000) AND (m.latitud + 1000) " +
-            "AND :longitud BETWEEN (m.longitud - 1000) AND (m.longitud + 1000) " +
+            "WHERE :latitud BETWEEN (m.latitud - :rango) AND (m.latitud + :rango) " +
+            "AND :longitud BETWEEN (m.longitud - :rango) AND (m.longitud + :rango) " +
             "AND m.estado = 'En parada'")
-    List<Monopatin> findMonopatinesCercanos(@Param("latitud") Double latitud, @Param("longitud") Double longitud);
+    List<Monopatin> findMonopatinesCercanos(@Param("latitud") Double latitud, @Param("longitud") Double longitud,
+                                            @Param("rango") Double rango);
 
 }

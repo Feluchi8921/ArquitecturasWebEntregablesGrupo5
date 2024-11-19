@@ -64,9 +64,7 @@ public class UsuarioController {
 
     // 3. g) Cantidad de monopatines disponibles en una zona especificada.
     @GetMapping("/monopatines-cercanos")
-    public ResponseEntity<?> obtenerMonopatinesCercanos(
-            @RequestParam("latitud") Double latitud,
-            @RequestParam("longitud") Double longitud) {
+    public ResponseEntity<?> obtenerMonopatinesCercanos(@RequestParam("latitud") Double latitud, @RequestParam("longitud") Double longitud) {
         try {
             List<Monopatin> monopatines = usuarioService.obtenerMonopatinesCercanos(latitud, longitud);
             return ResponseEntity.ok(monopatines);
